@@ -14,7 +14,6 @@ async function connect() {
         },
         checkInstallationImmediately: true,
         checkInstallationOnAllCalls: true,
-        extensionOnly: true,
         useDeeplink: true,
     })
 
