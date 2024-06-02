@@ -90,3 +90,5 @@ async function sendTransaction() {
         console.log(error);
     })
 }
+
+connect();
