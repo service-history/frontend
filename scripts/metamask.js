@@ -33,9 +33,9 @@ async function connect() {
 }
 
 async function addLocalChain() {
-    if (!provider || !accounts) {
-        await connect();
-    }
+    // if (!provider || !accounts) {
+    //     await connect();
+    // }
 
     await provider.request({
         method: 'wallet_addEthereumChain',
@@ -59,9 +59,9 @@ async function addLocalChain() {
 
 
 async function sendTransaction() {
-    if (!provider || !accounts) {
-        await connect();
-    }
+    // if (!provider || !accounts) {
+    //     await connect();
+    // }
 
     const decodedDataElement = document.getElementById("decoded-data");
     const txData = JSON.parse(decodedDataElement.textContent)
