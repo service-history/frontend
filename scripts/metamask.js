@@ -13,7 +13,9 @@ async function connect() {
             url: window.location.href,
         },
         checkInstallationImmediately: true,
-        checkInstallationOnAllCalls: true
+        checkInstallationOnAllCalls: true,
+        extensionOnly: true,
+        useDeeplink: true,
     })
 
     await MMSDK.connect().then(res => {
