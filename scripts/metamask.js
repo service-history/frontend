@@ -37,7 +37,7 @@ async function addLocalChain() {
         await connect();
     }
 
-    provider.request({
+    await provider.request({
         method: 'wallet_addEthereumChain',
         params: [
             {
@@ -53,8 +53,7 @@ async function addLocalChain() {
                 "chainName": "Hardhat Local"
             },
         ],
-    })
-        .then((res) => console.log('add', res))
+    }).then((res) => console.log('add', res))
         .catch((e) => console.log('ADD ERR', e));
 }
 
@@ -72,7 +71,7 @@ async function sendTransaction() {
         return;
     }
 
-    provider.request({
+    await provider.request({
         method: "eth_sendTransaction",
         params: [
             {
