@@ -10,8 +10,10 @@ function connect() {
         .then(res => {
             accounts = res
         }).catch(err => {
-            console.log(err)
-        })
+            const statusDiv = document.getElementById("metamask-status");
+            statusDiv.textContent = 'MetaMask wallet connected';
+            console.log(err);
+        });
 
     window.ethereum.request({
         method: 'wallet_switchEthereumChain',
@@ -20,10 +22,7 @@ function connect() {
                 "chainId": "0xAA36A7" // 11155111
             }
         ]
-    })
-
-    const statusDiv = document.getElementById("metamask-status");
-    statusDiv.textContent = 'MetaMask wallet connected'
+    });
 }
 
 function addLocalChain() {
@@ -57,7 +56,7 @@ transferButton.addEventListener("click", () => {
 
     if (!txData) {
         console.log("error parsing decoded tx data");
-        return
+        return;
     }
 
     window.ethereum.request({
