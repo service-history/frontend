@@ -6,6 +6,17 @@ async function connect() {
         console.log("already connected");
         return;
     }
+    
+    const MMSDK = new MetaMaskSDK.MetaMaskSDK({
+        dappMetadata: {
+            name: "CarServiceHistory MetaMask Gate",
+            url: window.location.href,
+        },
+        checkInstallationImmediately: true,
+        checkInstallationOnAllCalls: true,
+        extensionOnly: true,
+        useDeeplink: true,
+    })
 
     await MMSDK.connect().then(res => {
         provider = MMSDK.getProvider();
@@ -34,9 +45,9 @@ async function connect() {
 }
 
 async function addLocalChain() {
-    // if (!provider || !accounts) {
-    //     await connect();
-    // }
+    if (!provider || !accounts) {
+        await connect();
+    }
 
     await provider.request({
         method: 'wallet_addEthereumChain',
@@ -60,9 +71,9 @@ async function addLocalChain() {
 
 
 async function sendTransaction() {
-    // if (!provider || !accounts) {
-    //     await connect();
-    // }
+    if (!provider || !accounts) {
+        await connect();
+    }
 
     const decodedDataElement = document.getElementById("decoded-data");
     const txData = JSON.parse(decodedDataElement.textContent)
