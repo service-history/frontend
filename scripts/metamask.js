@@ -4,6 +4,7 @@ let provider
 async function connect() {
     if (provider) {
         console.log("already connected");
+        return;
     }
 
     await MMSDK.connect().then(res => {
