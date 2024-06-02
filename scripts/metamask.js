@@ -10,6 +10,7 @@ async function connect() {
         provider = MMSDK.getProvider();
     }).catch(err => {
         console.log("error connecting extention");
+        return;
     })
 
     await provider.request({ method: "eth_requestAccounts" })
@@ -31,7 +32,11 @@ async function connect() {
     });
 }
 
-function addLocalChain() {
+async function addLocalChain() {
+    if (!provider || !accounts) {
+        await connect();
+    }
+
     provider.request({
         method: 'wallet_addEthereumChain',
         params: [
@@ -54,7 +59,11 @@ function addLocalChain() {
 }
 
 
-function  sendTransaction() {
+async function sendTransaction() {
+    if (!provider || !accounts) {
+        await connect();
+    }
+
     const decodedDataElement = document.getElementById("decoded-data");
     const txData = JSON.parse(decodedDataElement.textContent)
 
@@ -81,5 +90,3 @@ function  sendTransaction() {
         console.log(error);
     })
 }
-
-connect();
