@@ -1,12 +1,18 @@
 let accounts
+let provider
 
-function connect() {
-    if (!window.ethereum) {
-        console.log("metamask not found")
-        return;
+async function connect() {
+    if (provider) {
+        console.log("already connected");
     }
 
-    window.ethereum.request({ method: "eth_requestAccounts" })
+    await MMSDK.connect().then(res => {
+        provider = MMSDK.getProvider();
+    }).catch(err => {
+        console.log("error connecting extention");
+    })
+
+    await provider.request({ method: "eth_requestAccounts" })
         .then(res => {
             accounts = res;
             const statusDiv = document.getElementById("metamask-status");
@@ -15,7 +21,7 @@ function connect() {
             console.log(err);
         });
 
-    window.ethereum.request({
+    await provider.request({
         method: 'wallet_switchEthereumChain',
         params: [
             {
@@ -26,31 +32,29 @@ function connect() {
 }
 
 function addLocalChain() {
-    window.ethereum
-        .request({
-            method: 'wallet_addEthereumChain',
-            params: [
-                {
-                    "nativeCurrency": {
-                        "name": "HETH",
-                        "symbol": "HETH",
-                        "decimals": 18
-                    },
-                    "rpcUrls": [
-                        "http://127.0.0.1:8545"
-                    ],
-                    "chainId": "0x7A69",
-                    "chainName": "Hardhat Local"
+    provider.request({
+        method: 'wallet_addEthereumChain',
+        params: [
+            {
+                "nativeCurrency": {
+                    "name": "HETH",
+                    "symbol": "HETH",
+                    "decimals": 18
                 },
-            ],
-        })
+                "rpcUrls": [
+                    "http://127.0.0.1:8545"
+                ],
+                "chainId": "0x7A69",
+                "chainName": "Hardhat Local"
+            },
+        ],
+    })
         .then((res) => console.log('add', res))
         .catch((e) => console.log('ADD ERR', e));
 }
 
-const transferButton = document.getElementById("transfer-eth");
 
-transferButton.addEventListener("click", () => {
+function  sendTransaction() {
     const decodedDataElement = document.getElementById("decoded-data");
     const txData = JSON.parse(decodedDataElement.textContent)
 
@@ -59,7 +63,7 @@ transferButton.addEventListener("click", () => {
         return;
     }
 
-    window.ethereum.request({
+    provider.request({
         method: "eth_sendTransaction",
         params: [
             {
@@ -76,6 +80,6 @@ transferButton.addEventListener("click", () => {
         alert("smth went wrong while sending transaction");
         console.log(error);
     })
-});
+}
 
 connect();
