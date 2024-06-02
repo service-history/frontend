@@ -15,8 +15,9 @@
                 name: "CarServiceHistory MetaMask Gate",
                 url: window.location.href,
             },
-            checkInstallationImmediately: true
-                })
+            checkInstallationImmediately: true,
+            useDeeplink: true
+        })
     </script>
 </head>
 
@@ -34,7 +35,7 @@
         <div class="mt-3 mb-3 break-line">
             <button id="btn-add-local-chain" class="btn btn-primary" onclick="addLocalChain()">Add Local Chain</button>
         </div>
-        
+
         <div class="mt-3 mb-3 break-line">
             <button id="btn-connect" class="btn btn-primary" onclick="connect()">Connect</button>
         </div>
