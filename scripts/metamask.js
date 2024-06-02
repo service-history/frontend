@@ -8,10 +8,10 @@ function connect() {
 
     window.ethereum.request({ method: "eth_requestAccounts" })
         .then(res => {
-            accounts = res
-        }).catch(err => {
+            accounts = res;
             const statusDiv = document.getElementById("metamask-status");
             statusDiv.textContent = 'MetaMask wallet connected';
+        }).catch(err => {
             console.log(err);
         });
 
