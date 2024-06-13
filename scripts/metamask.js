@@ -40,7 +40,7 @@ async function connect() {
         method: 'wallet_switchEthereumChain',
         params: [
             {
-                "chainId": localChainId
+                "chainId": sepoliaChainId
             }
         ]
     });
@@ -101,7 +101,7 @@ async function sendTransaction() {
                 to: txData['to'],
                 // value: "0xDE0B6B3A7640000", // 1000000000000000000 wei or 0.1 eth
                 data: txData['data'],
-                chainId: "11155111"
+                chainId: sepoliaChainId
             },
         ]
     }).then((result) => {
