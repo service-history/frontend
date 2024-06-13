@@ -10,35 +10,46 @@
     <!-- metamask extention -->
     <!-- <script src="./node_modules/@metamask/sdk/dist/browser/iife/metamask-sdk.js"></script> -->
     <script src="https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/cdn/metamask-sdk.js"></script>
+
+    <style>
+        .wrap-text {
+          word-break: break-all; /* Ensures long words break */
+          overflow-wrap: break-word; /* Wraps text within the container */
+          white-space: normal; /* Allows text to wrap */
+        }
+      </style>
 </head>
 
 <body>
     <script src="./scripts/metamask.js"></script>
 
     <div class="container">
-        <div>
+        <div class="text w-sm-100 w-md-75 w-lg-75 bg-light p-3">
             <h3>Transaction Data</h3>
-            <div id="decoded-data" class="code"></div>
+            <div id="decoded-data" class="w-sm-100 w-md-75 w-lg-75 bg-light p-3 wrap-text"></div>
+        </div>
+
+        <div class="mt-3 mb-3 break-line w-75">
+            <button id="transfer-eth" class="btn btn-primary btn-lg" onclick="sendTransaction()">Send
+                Transaction</button>
         </div>
 
         <div class="mt-3 mb-3 break-line">
-            <button id="transfer-eth" class="btn btn-primary" onclick="sendTransaction()">Send Transaction</button>
+            <button id="btn-add-local-chain" class="btn btn-primary btn-lg" onclick="addLocalChain()">Add
+                Local Chain</button>
         </div>
 
         <div class="mt-3 mb-3 break-line">
-            <button id="btn-add-local-chain" class="btn btn-primary" onclick="addLocalChain()">Add Local Chain</button>
+            <button id="btn-connect" class="btn btn-primary btn-lg" onclick="connect()">Connect</button>
         </div>
-
-        <div class="mt-3 mb-3 break-line">
-            <button id="btn-connect" class="btn btn-primary" onclick="connect()">Connect</button>
+       
+        <div class="container">
+            <div class="text w-sm-100 w-md-75 w-lg-75 bg-light p-3" id="metamask-status">MetaMask wallet not connected
+            </div>
         </div>
-    </div>
-    <div class="container">
-        <div class="text" id="metamask-status">MetaMask wallet not connected</div>
     </div>
 
     <script src="./scripts/script.js"></script>
-
 </body>
 
 </html>

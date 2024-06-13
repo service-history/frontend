@@ -1,12 +1,14 @@
 let accounts
 let provider
+const localChainId = "0x7A69"
+const sepoliaChainId = "0xAA36A7"
 
 async function connect() {
     if (provider) {
         console.log("already connected");
         return;
     }
-    
+
     const MMSDK = new MetaMaskSDK.MetaMaskSDK({
         dappMetadata: {
             name: "CarServiceHistory MetaMask Gate",
@@ -34,14 +36,14 @@ async function connect() {
             console.log(err);
         });
 
-    await provider.request({
-        method: 'wallet_switchEthereumChain',
-        params: [
-            {
-                "chainId": "0xAA36A7" // 11155111
-            }
-        ]
-    });
+    // await provider.request({
+    //     method: 'wallet_switchEthereumChain',
+    //     params: [
+    //         {
+    //             "chainId": localChainId
+    //         }
+    //     ]
+    // });
 }
 
 async function addLocalChain() {
@@ -61,12 +63,20 @@ async function addLocalChain() {
                 "rpcUrls": [
                     "http://127.0.0.1:8545"
                 ],
-                "chainId": "0x7A69",
+                "chainId": localChainId,
                 "chainName": "Hardhat Local"
             },
         ],
-    }).then((res) => console.log('add', res))
-        .catch((e) => console.log('ADD ERR', e));
+    });
+
+    await provider.request({
+        method: 'wallet_switchEthereumChain',
+        params: [
+            {
+                "chainId": localChainId
+            }
+        ]
+    });
 }
 
 
