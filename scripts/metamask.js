@@ -113,4 +113,3 @@ async function sendTransaction() {
 }
 
 connect();
-addLocalChain();
