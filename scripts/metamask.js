@@ -36,14 +36,14 @@ async function connect() {
             console.log(err);
         });
 
-    // await provider.request({
-    //     method: 'wallet_switchEthereumChain',
-    //     params: [
-    //         {
-    //             "chainId": localChainId
-    //         }
-    //     ]
-    // });
+    await provider.request({
+        method: 'wallet_switchEthereumChain',
+        params: [
+            {
+                "chainId": localChainId
+            }
+        ]
+    });
 }
 
 async function addLocalChain() {
@@ -113,3 +113,4 @@ async function sendTransaction() {
 }
 
 connect();
+addLocalChain();
